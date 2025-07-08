@@ -163,7 +163,7 @@ public class InvoiceProcessor : IInvoiceProcessor
     }
 
     /// <summary>
-    /// Validates the total price of assigned reservations against the expected total amount.
+    /// Validates the unit price of assigned reservations against the expected price.
     /// </summary>
     private Task ValidatePriceAsync(ProcessingRowContext ctx)
     {
