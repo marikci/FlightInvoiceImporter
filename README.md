@@ -80,8 +80,8 @@ Copy and adjust `appsettings.json` (or override via environment-specific files):
 
 1. **Clone and build the project**
     ```bash
-    git clone https://github.com/your-org/odeon-flight-invoice-importer.git
-    cd odeon-flight-invoice-importer
+    git clone https://github.com/marikci/FlightInvoiceImporter.git
+    cd FlightInvoiceImporter
     dotnet build
     ```
 
