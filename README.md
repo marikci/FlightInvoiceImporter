@@ -106,7 +106,7 @@ Copy and adjust `appsettings.json` (or override via environment-specific files):
 
 **Design & Architecture:**
 - **Core Principles:** SOLID
-- **Design Patterns:** Factory, Repository, Dependency Injection
+- **Design Patterns:** Chain of Responsibility, Factory, Repository
 - **Extensibility**: Add new invoice formats, custom validation rules, or alternative email transports  
 
 ---
