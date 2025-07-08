@@ -1,0 +1,107 @@
+@using FlightInvoiceImporter.Business.Models
+@model InvoiceReportViewModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Invoice Report – @Model.InvoiceNo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+        }
+
+        h1 {
+            color: #004080;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1em;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Invoice Report – @Model.InvoiceNo</h1>
+    <p>
+        <strong>Total rows:</strong> @Model.TotalRows<br />
+        <strong>Fully matched:</strong> @Model.FullyMatched<br />
+        <strong>Unmatched rows:</strong> @Model.UnmatchedCount<br />
+        <strong>Duplicates:</strong> @Model.DuplicateCount<br />
+        <strong>Price mismatches:</strong> @Model.PriceMismatchCount
+    </p>
+
+    @if (Model.UnmatchedRows.Any())
+    {
+        <h2>Unmatched Rows</h2>
+        <table>
+            <thead>
+                <tr><th>Flight</th><th>Seats</th><th>Total Amount</th></tr>
+            </thead>
+            <tbody>
+                @foreach (var row in Model.UnmatchedRows)
+                {
+                    <tr>
+                        <td>@row.FlightDate: @row.CarrierCode-@row.FlightNo</td>
+                        <td>@row.SoldSeats</td>
+                        <td>@row.TotalAmount.ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    @if (Model.DuplicateModels.Any())
+    {
+        <h2>Duplicate Reservations</h2>
+        <table>
+            <thead>
+                <tr><th>Booking Id</th><th>Flight</th><th>Price</th></tr>
+            </thead>
+            <tbody>
+                @foreach (var m in Model.DuplicateModels)
+                {
+                    <tr>
+                        <td>@m.BookingId</td>
+                        <td>@m.FlightDate: @m.CarrierCode-@m.FlightNumber</td>
+                        <td>@m.Price.ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    @if (Model.PriceMismatchRows.Any())
+    {
+        <h2>Price Mismatches</h2>
+        <table>
+            <thead>
+                <tr><th>Flight</th><th>Invoice Total</th><th>DB Sum</th></tr>
+            </thead>
+            <tbody>
+                @foreach (var row in Model.PriceMismatchRows)
+                {
+                    <tr>
+                        <td>@row.FlightDate: @row.CarrierCode-@row.FlightNo</td>
+                        <td>@row.TotalAmount.ToString("C")</td>
+                        <td>@(Model.SelectedSumFor(row).ToString("C"))</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <p>Best regards,<br />Odeon Billing Team</p>
+</body>
+</html>

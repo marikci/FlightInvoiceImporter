@@ -1,0 +1,141 @@
+﻿@model FlightInvoiceImporter.Models.Process.InvoiceReportViewModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Odeon Software – Invoice Report</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+        }
+
+        header {
+            background: #0052cc;
+            padding: 20px;
+            text-align: center;
+        }
+
+            header img {
+                max-height: 50px;
+            }
+
+        .content {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #0052cc;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .summary {
+            background: #e6f0ff;
+            border: 1px solid #cce0ff;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+            .summary p {
+                margin: 5px 0;
+                font-size: 16px;
+            }
+
+        h2 {
+            color: #333333;
+            font-size: 20px;
+            margin-top: 30px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        footer {
+            background: #f0f0f0;
+            padding: 15px;
+            font-size: 12px;
+            color: #666666;
+            text-align: center;
+        }
+
+        a {
+            color: #0052cc;
+            text-decoration: none;
+        }
+        @@media only screen and (max-width: 480px) {
+            .content
+
+        {
+            padding: 10px;
+        }
+
+        h1 {
+            font-size: 20px;
+        }
+
+        .summary p {
+            font-size: 14px;
+        }
+
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <header>
+        <img src="https://www.odeontechnology.com/assets/logo.svg" alt="Odeon Software Logo">
+    </header>
+
+    <!-- Body -->
+    <div class="content">
+        <h1>Invoice Report – @Model.InvoiceNo</h1>
+
+        <!-- Summary Card -->
+        <div class="summary">
+            <p>
+                <strong>Total Processed Records:</strong> @Model.TotalRows
+            </p>
+            <p>
+                <strong>Successfully Matched:</strong> @Model.FullyMatched
+            </p>
+            <ul>
+                <li>Unmatched: @Model.UnmatchedCount (Sum = @Model.UnmatchedTotal.ToString("C", Model.CultureInfo))</li>
+                <li>Duplicates: @Model.DuplicateCount (Sum = @Model.DuplicateTotal.ToString("C", Model.CultureInfo))</li>
+                <li>Price Mismatches: @Model.PriceMismatchCount (Sum = @Model.PriceMismatchTotal.ToString("C", Model.CultureInfo))</li>
+            </ul>
+        </div>
+
+        <!-- Attachments Note -->
+        <p>Please review the attached CSV reports for detailed information.</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Odeon Software. All rights reserved.</p>
+        <p>
+            This email was generated automatically. For assistance, please contact
+            <a href="mailto:invoice@odeon.com">invoice@odeon.com</a>.
+        </p>
+    </footer>
+</div>
+</body>
+</html>
